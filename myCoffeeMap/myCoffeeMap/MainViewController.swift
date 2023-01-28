@@ -14,33 +14,30 @@ class MainViewController: UITableViewController {
 
     }
 
-    let restaurantName = [ "She", "TOTO", "Hello Aster", "Civil", "Verle", "ZOE", "Tiger lily", "Ezo"]
     
+    let places = Place.getPlaces()
     
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return restaurantName.count
+        return places.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
         
-        cell.nameLable.text = restaurantName[indexPath.row]
-        cell.imageOfPlace.image = UIImage(named: restaurantName[indexPath.row])
+        cell.nameLable.text = places[indexPath.row].name
+        cell.lacationLable.text = places[indexPath.row].lacation
+        cell.typeLable.text = places[indexPath.row].type
+        cell.imageOfPlace.image = UIImage(named: places[indexPath.row].image)
         cell.imageOfPlace.layer.cornerRadius = cell.imageOfPlace.frame.size.height / 2
         cell.imageOfPlace.clipsToBounds = true
         return cell
     }
     
 
-    // MARK: - TableView
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 85
-    }
     /*
     // MARK: - Navigation
 
@@ -51,4 +48,6 @@ class MainViewController: UITableViewController {
     }
     
 */
+    
+    @IBAction func cancelAction(_ segue: UIStoryboardSegue) {}
 }
