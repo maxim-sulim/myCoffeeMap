@@ -258,6 +258,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="ITO-3g-9jT"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="imageOfPlace" destination="kOd-Iy-uac" id="swn-JU-nwv"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lrr-Ti-Y5U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="Jiv-qS-5fW" userLabel="Exit" sceneMemberID="exit"/>
@@ -300,7 +303,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vRB-0c-FAd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1284.7328244274809" y="-68.309859154929583"/>
+            <point key="canvasLocation" x="1381" y="-68"/>
         </scene>
     </scenes>
     <resources>
