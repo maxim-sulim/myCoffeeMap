@@ -15,7 +15,7 @@ class MainViewController: UITableViewController {
     }
 
     
-    let places = Place.getPlaces()
+    var places = Place.getPlaces()
     
     // MARK: - Table view data source
 
@@ -28,10 +28,18 @@ class MainViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
         
-        cell.nameLable.text = places[indexPath.row].name
-        cell.lacationLable.text = places[indexPath.row].lacation
-        cell.typeLable.text = places[indexPath.row].type
-        cell.imageOfPlace.image = UIImage(named: places[indexPath.row].image)
+        let place = places[indexPath.row]
+        
+        cell.nameLable.text = place.name
+        cell.lacationLable.text = place.lacation
+        cell.typeLable.text = place.type
+        
+        if place.image == nil {
+            cell.imageOfPlace.image = UIImage(named: place.restaurantImage!)
+        } else {
+            cell.imageOfPlace.image = place.image
+        }
+        
         cell.imageOfPlace.layer.cornerRadius = cell.imageOfPlace.frame.size.height / 2
         cell.imageOfPlace.clipsToBounds = true
         return cell
@@ -48,6 +56,17 @@ class MainViewController: UITableViewController {
     }
     
 */
-    
-    @IBAction func cancelAction(_ segue: UIStoryboardSegue) {}
+    //передача данные от одного вию контроллера к другому
+    @IBAction func unwindSegue(_ segue: UIStoryboardSegue) {
+        
+        //создаем экземпляр класса NewPlaceViewController и кастим полученный вию контроллер до класса НПВК
+        guard let newPlaceVC = segue.source as? NewPlaceViewController else { return }
+        //через экземпляр класса можем вызвать метод saveNewPlace
+        newPlaceVC.saveNewPlace()
+        //теперь экземпляр имеет конкретные значения и можно добавить его в модель
+        places.append(newPlaceVC.newPlace!)
+        //обновляем интервейс
+        tableView.reloadData()
+        
+    }
 }
